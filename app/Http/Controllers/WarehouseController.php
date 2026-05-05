@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class WarehouseController extends Controller
 {
@@ -12,7 +13,9 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('warehouses/index', [
+            'warehouses' => Warehouse::latest()->get(),
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class WarehouseController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('warehouses/create');
     }
 
     /**
@@ -28,7 +31,15 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'code' => ['required', 'string', 'max:5', 'unique:warehouses,code'],
+            'name' => ['required', 'string', 'max:20'],
+            'location' => ['required', 'string', 'max:40'],
+        ]);
+
+        Warehouse::create($validated);
+
+        return to_route('warehouses.index');
     }
 
     /**
@@ -44,7 +55,9 @@ class WarehouseController extends Controller
      */
     public function edit(Warehouse $warehouse)
     {
-        //
+        return Inertia::render('warehouses/edit', [
+            'warehouse' => $warehouse
+        ]);
     }
 
     /**
@@ -52,7 +65,15 @@ class WarehouseController extends Controller
      */
     public function update(Request $request, Warehouse $warehouse)
     {
-        //
+        $validated = $request->validate([
+            'code' => ['required', 'string', 'max:5', 'unique:warehouses,code,' . $warehouse->id],
+            'name' => ['required', 'string', 'max:20'],
+            'location' => ['required', 'string', 'max:40'],
+        ]);
+
+        $warehouse->update($validated);
+
+        return to_route('warehouses.index');
     }
 
     /**
@@ -60,6 +81,8 @@ class WarehouseController extends Controller
      */
     public function destroy(Warehouse $warehouse)
     {
-        //
+        $warehouse->delete();
+
+        return to_route('warehouses.index');
     }
 }
