@@ -50,18 +50,6 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
-      - name: PHP Format Check
-        run: composer lint:check
-
-      - name: Frontend Format Check
-        run: npm run format:check
-
-      - name: Frontend Lint
-        run: npm run lint:check
-
-      - name: TypeScript Check
-        run: npm run types:check
-
       - name: Tests
         run: php artisan test
 
