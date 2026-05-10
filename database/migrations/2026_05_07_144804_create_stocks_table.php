@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('warehouse_id')->constrained('warehouses');
             $table->foreignId('product_id')->constrained('products');
-            $table->unsignedInteger('quantity')->default(0);
+            $table->integer('quantity')->default(0);
             $table->decimal('average_cost',15,2)->default(0);
             $table->decimal('total_value',15,2)->default(0);
             $table->timestamps();

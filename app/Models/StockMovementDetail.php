@@ -13,6 +13,7 @@ class StockMovementDetail extends Model
         'quantity',
         'unit_cost',
         'total_cost',
+        'notes',
     ];
 
     protected function casts(): array

@@ -5,6 +5,7 @@ import {
     Folder,
     FolderGit2,
     LayoutGrid,
+    PackageSearch,
     Warehouse,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
@@ -23,6 +24,7 @@ import {
 import { dashboard } from '@/routes';
 import { index as categoriesIndex } from '@/routes/categories';
 import { index as productsIndex } from '@/routes/products';
+import { index as stocksIndex } from '@/routes/stocks';
 import { index as warehousesIndex } from '@/routes/warehouses';
 import type { NavItem } from '@/types';
 
@@ -46,6 +48,11 @@ const mainNavItems: NavItem[] = [
         title: 'Products',
         href: productsIndex(),
         icon: File,
+    },
+    {
+        title: 'Stock',
+        href: stocksIndex(),
+        icon: PackageSearch,
     },
 ];
 

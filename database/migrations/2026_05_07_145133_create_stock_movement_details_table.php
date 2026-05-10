@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('unit_cost',15,2)->default(0);
             $table->decimal('total_cost',15,2)->default(0);
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
